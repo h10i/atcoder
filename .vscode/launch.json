@@ -2,26 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(gdb) Bash on Windows Launch",
+      "name": "cpp debug active file",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${command:extension.vscode-wsl-workspaceFolder}/problem.exe",
+      "program": "${workspaceFolder}/a.exe",
       "args": [
         "<",
-        "${command:extension.vscode-wsl-workspaceFolder}/problem.in"
+        "${workspaceFolder}/input"
       ],
       "stopAtEntry": false,
-      "cwd": "${command:extension.vscode-wsl-workspaceFolder}",
+      "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": true,
-      "pipeTransport": {
-        "debuggerPath": "/usr/bin/gdb",
-        "pipeProgram": "${env:windir}\\system32\\bash.exe",
-        "pipeArgs": [
-          "-c"
-        ],
-        "pipeCwd": "/"
-      },
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
@@ -29,9 +23,7 @@
           "ignoreFailures": true
         }
       ],
-      "sourceFileMap": {
-        "${command:extension.vscode-wsl-workspaceFolder}": "${workspaceFolder}"
-      },
+      "preLaunchTask": "C/C++: g++ build active file",
     }
   ]
 }
