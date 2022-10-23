@@ -1,44 +1,29 @@
-#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define repi(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
 
-const int INF = 1e9;
+#define rep(i, n) for (int i = 0; i < (n); ++i)
+#define srep(i, s, t) for (int i = s; i < t; ++i)
+#define rng(a) a.begin(), a.end()
+#define maxs(x, y) (x = max(x, y))
+using vi = vector<int>;
+using vvi = vector<vi>;
 
 int main() {
-  int N;
-  cin >> N;
+  int n;
+  cin >> n;
+  vvi a(n, vi(3));
+  rep(i, n) rep(j, 3) cin >> a[i][j];
 
-  vector<vector<int>> a(N, vector<int>(3));
-  rep(i, N) {
-    rep(j, 3) {
-      cin >> a[i][j];
-    }
-  }
-
-  vector<vector<int>> dp(N, vector<int>(3));
+  vvi dp(n, vi(3));
   dp[0] = a[0];
 
-  repi(i, 1, N) {
-    rep(j, 3) {
-      rep(k, 3) {
-        if (j != k) {
-          int point = dp[i - 1][j] + a[i][k];
-          if (point > dp[i][k]) {
-            dp[i][k] = point;
-          }
-        }
-      }
+  srep(i, 1, n) rep(j, 3) {
+    rep(k, 3) {
+      if (j == k) continue;
+      maxs(dp[i][k], dp[i - 1][j] + a[i][k]);
     }
   }
 
-  int ans = 0;
-  rep(i, 3) {
-    if (dp[N - 1][i] > ans) {
-      ans = dp[N - 1][i];
-    }
-  }
-
-  cout << ans << endl;
+  cout << *max_element(rng(dp[n - 1])) << endl;
+  return 0;
 }

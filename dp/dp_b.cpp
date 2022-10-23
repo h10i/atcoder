@@ -1,35 +1,29 @@
-#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define repi(i, a, b) for(int i = (int)(a); i < (int)(b); i++)
 
-const int INF = 1e9;
+#define rep(i, n) for (int i = 0; i < (n); ++i)
+#define srep(i, s, t) for (int i = s; i < t; ++i)
+#define mins(x, y) (x = min(x, y))
+using vi = vector<int>;
+const int INF = 1001001001;
 
 int main() {
-  int N, K;
-  cin >> N >> K;
+  int n, k;
+  cin >> n >> k;
+  vi h(n);
+  rep(i, n) cin >> h[i];
 
-  vector<int> h(N);
-  rep(i, N) {
-    cin >> h[i];
-  }
-
-  vector<int> dp(N);
+  vi dp(n);
   dp[1] = abs(h[1] - h[0]);
 
-  repi(i, 2, N) {
+  srep(i, 2, n) {
     int min_cost = INF;
-
-    repi(j, 1, min(i + 1, K + 1)) {
-      int cost = dp[i - j] + abs(h[i] - h[i - j]);
-      if (cost < min_cost) {
-        min_cost = cost;
-      }
+    srep(j, 1, min(i + 1, k + 1)) {
+      mins(min_cost, dp[i - j] + abs(h[i] - h[i - j]));
     }
-
     dp[i] = min_cost;
   }
 
-  cout << dp[N - 1] << endl;
+  cout << dp[n - 1] << endl;
+  return 0;
 }

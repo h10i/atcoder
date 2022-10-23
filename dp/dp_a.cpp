@@ -1,26 +1,25 @@
-#define _GLIBCXX_DEBUG
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+
+#define rep(i, n) for (int i = 0; i < (n); ++i)
+using vi = vector<int>;
 
 int main() {
-  int N;
-  cin >> N;
+  int n;
+  cin >> n;
+  vi h(n);
+  rep(i, n) cin >> h[i];
 
-  vector<int> h(N);
-  rep(i, N) {
-    cin >> h[i];
-  }
-
-  vector<int> dp(N);
+  vi dp(n);
+  dp[0] = 0;
   dp[1] = abs(h[1] - h[0]);
 
-  rep(i, N - 2) {
-    vector<int> cost(2);
-    cost[0] = abs(h[i + 2] - h[i + 1]);
-    cost[1] = abs(h[i + 2] - h[i]);
-    dp[i + 2] = min(dp[i + 1] + cost[0], dp[i] + cost[1]);
+  rep(i, n - 2) {
+    int cost1 = dp[i + 1] + abs(h[i + 2] - h[i + 1]);
+    int cost2 = dp[i] + abs(h[i + 2] - h[i]);
+    dp[i + 2] = min(cost1, cost2);
   }
 
-  cout << dp[N - 1] << endl;
+  cout << dp[n - 1] << endl;
+  return 0;
 }
