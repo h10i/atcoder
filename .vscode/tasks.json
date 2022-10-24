@@ -2,14 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build",
+      "label": "build_cpp",
       "type": "shell",
       "command": "/usr/bin/g++",
       "args": [
         "-std=gnu++17",
         "-Wall",
         "-Wextra",
-        "-O2",
+        "-g",
+        "-O0",
         "-DONLINE_JUDGE",
         "-I/opt/boost/gcc/include",
         "-L/opt/boost/gcc/lib",
