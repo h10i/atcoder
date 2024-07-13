@@ -6,7 +6,7 @@
       "type": "shell",
       "command": "/usr/bin/g++",
       "args": [
-        "-std=gnu++17",
+        "-std=gnu++20",
         "-Wall",
         "-Wextra",
         "-g",
@@ -17,12 +17,13 @@
         "-I${workspaceFolder}/ac-library",
         "-o",
         "'${workspaceFolder}/problem.exe'",
-        "'${file}'",
+        "'${file}'"
       ],
       "group": {
         "kind": "build",
         "isDefault": true
-      }
+      },
+      "problemMatcher": []
     }
   ]
 }
